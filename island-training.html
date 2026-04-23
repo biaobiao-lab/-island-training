@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>島宇實業 | 戰略夥伴核心培訓大綱</title>
+    <!-- 引入 Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- 引入 FontAwesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* =========================================
+           創投專案 CI 色系 (VC Aesthetic Variables)
+           ========================================= */
+        :root {
+            --vc-navy: #101e38;         /* 創投深海藍 */
+            --vc-navy-light: #1a2f52;   /* 次級深藍 */
+            --vc-terracotta: #c47c3c;   /* 創投赤陶金 */
+            --vc-sand: #f6f4f0;         /* 頂級紙張質感沙白 */
+            --text-main: #1a1a1a;       /* 墨黑色，取代純黑 */
+            --text-sub: #666666;        /* 附註說明色 */
+            --border-color: rgba(16, 30, 56, 0.15); /* 細緻邊框 */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #111; 
+            font-family: 'Noto Sans TC', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* 經典襯線體應用 */
+        h1, h2, h3, .section-title, .card-title, .title-main, .serif-text, .chapter-num {
+            font-family: 'Noto Serif TC', 'Playfair Display', serif;
+        }
+
+        /* =========================================
+           手機專屬容器
+           ========================================= */
+        .app-wrapper {
+            max-width: 430px;
+            margin: 0 auto;
+            background-color: var(--vc-sand);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           多維度動態特效
+           ========================================= */
+        .reveal-up {
+            opacity: 0; transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-blur {
+            opacity: 0; filter: blur(15px); transform: translateY(20px) scale(1.05);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale {
+            opacity: 0; transform: scale(0.95) translateY(15px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-left {
+            opacity: 0; transform: translateX(-30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-up.active, .reveal-left.active { opacity: 1; transform: translate(0); }
+        .reveal-blur.active { opacity: 1; filter: blur(0); transform: translate(0) scale(1); }
+        .reveal-scale.active { opacity: 1; transform: scale(1) translateY(0); }
+
+        .stagger-item {
+            opacity: 0; transform: translateX(-15px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .stagger-container.active .stagger-item:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateX(0); }
+        .stagger-container.active .stagger-item:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateX(0); }
+        .stagger-container.active .stagger-item:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateX(0); }
+        .stagger-container.active .stagger-item:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateX(0); }
+        .stagger-container.active .stagger-item:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateX(0); }
+        .stagger-container.active .stagger-item:nth-child(6) { transition-delay: 0.6s; opacity: 1; transform: translateX(0); }
+
+        /* =========================================
+           [大師級封面] 頂級私行深邃光影與戰略軸線
+           ========================================= */
+        .hero-header {
+            background-color: #08101e; 
+            background-image: radial-gradient(circle at 90% 10%, #1a2f52 0%, #08101e 70%);
+            padding: 80px 24px 90px 32px;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .hero-header::before {
+            content: ''; position: absolute; top: -15%; right: -25%;
+            width: 350px; height: 350px; border: 1px solid rgba(196, 124, 60, 0.15);
+            border-radius: 50%; z-index: 0; pointer-events: none;
+        }
+        .hero-header::after {
+            content: ''; position: absolute; bottom: -20%; right: -5%;
+            width: 250px; height: 250px; border: 1px solid rgba(196, 124, 60, 0.08);
+            border-radius: 50%; z-index: 0; pointer-events: none;
+        }
+
+        /* 左側戰略軸線 */
+        .hero-axis {
+            position: absolute; left: 20px; top: 70px; bottom: 40px; width: 1px;
+            background: linear-gradient(to bottom, rgba(196, 124, 60, 0.8), rgba(196, 124, 60, 0) 90%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative; z-index: 2; text-align: left; padding-left: 16px; 
+        }
+
+        .hero-badge {
+            display: inline-block; font-size: 9px; letter-spacing: 4px;
+            color: rgba(245, 242, 235, 0.5); border-bottom: 1px solid rgba(196, 124, 60, 0.4);
+            padding-bottom: 6px; margin-bottom: 30px; text-transform: uppercase;
+            font-family: 'Noto Sans TC', sans-serif; font-weight: 500;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 600;
+            letter-spacing: 1.5px; color: #ffffff; line-height: 1.1;
+        }
+
+        .brand-name {
+            font-size: 13px; letter-spacing: 12px; color: var(--vc-terracotta);
+            margin-bottom: 40px; display: block; font-family: 'Noto Sans TC', sans-serif;
+            margin-top: 8px; margin-right: -12px; 
+        }
+
+        .title-main {
+            font-size: 32px; font-weight: 700; line-height: 1.35; margin-bottom: 16px;
+            color: var(--vc-sand); letter-spacing: 2px;
+        }
+
+        .title-sub {
+            font-size: 11px; color: rgba(245, 242, 235, 0.4); font-weight: 400;
+            letter-spacing: 5px; font-family: 'Noto Sans TC', sans-serif; text-transform: uppercase;
+        }
+
+        /* =========================================
+           內容區塊與「大師級雜誌排版」設計
+           ========================================= */
+        .content-container {
+            padding: 0 20px 80px; 
+            margin-top: 30px; 
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin: 50px 0 24px 0px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--vc-navy);
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        /* 標題底下的細線點綴 */
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
+            margin-left: 16px;
+        }
+
+        .section-title i {
+            color: var(--vc-terracotta);
+            margin-right: 12px;
+            font-size: 16px;
+        }
+
+        /* 核心重塑：俐落直角與錯位陰影的 Editorial Card */
+        .card {
+            background-color: #ffffff;
+            border-radius: 0; /* 徹底移除圓角 */
+            padding: 32px 24px; /* 加大內距，增加呼吸感 */
+            margin-bottom: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: 6px 6px 0 rgba(16, 30, 56, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+
+        .card:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 rgba(16, 30, 56, 0.04);
+        }
+
+        /* 卡片頂部赤陶金粗線 */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px;
+            height: 3px;
+            background-color: var(--vc-terracotta);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            padding-right: 45px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            position: relative;
+            z-index: 1;
+        }
+
+        .chapter-num {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: rgba(16, 30, 56, 0.09);
+            font-weight: 700;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--vc-navy);
+            line-height: 1.4;
+        }
+
+        .time-badge {
+            color: var(--vc-terracotta);
+            background-color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Noto Sans TC', sans-serif;
+            padding: 4px 8px;
+            border: 1px solid rgba(196, 124, 60, 0.3);
+            box-shadow: 2px 2px 0 rgba(16, 30, 56, 0.08);
+            flex-shrink: 0;
+        }
+
+        /* 主項目與標籤 */
+        .list-group {
+            list-style: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .list-item {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 24px;
+            font-size: 15px;
+            color: var(--vc-navy);
+            font-weight: 600; 
+            letter-spacing: 0.5px;
+        }
+
+        .list-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .list-item::before {
+            content: ''; 
+            position: absolute;
+            left: 0;
+            top: 8px; 
+            width: 5px; 
+            height: 5px;
+            background-color: var(--vc-terracotta);
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .tag-item {
+            font-size: 12px;
+            color: var(--text-sub);
+            background-color: transparent; 
+            padding: 4px 8px;
+            border-radius: 0px; 
+            font-weight: 400;
+            border: 1px solid rgba(16, 30, 56, 0.15);
+            line-height: 1.3;
+            font-family: 'Noto Sans TC', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .tag-item.highlight {
+            color: var(--vc-terracotta);
+            border-color: rgba(196, 124, 60, 0.4);
+            font-weight: 500;
+        }
+
+        .nested-note {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-top: 8px;
+            line-height: 1.5;
+            padding-left: 12px;
+            border-left: 2px solid rgba(16, 30, 56, 0.1);
+            font-weight: 400;
+        }
+
+        /* 戰略加值專題 */
+        .card-bonus {
+            background-color: var(--vc-navy);
+            color: var(--vc-sand);
+            border: none;
+            box-shadow: 6px 6px 0 rgba(196, 124, 60, 0.2); 
+        }
+        
+        .card-bonus::before {
+            background-color: var(--vc-sand);
+        }
+
+        .card-bonus .card-title {
+            color: var(--vc-sand);
+        }
+        
+        .card-bonus .chapter-num {
+            color: rgba(255,255,255,0.15); 
+        }
+
+        .card-bonus .list-item {
+            color: var(--vc-sand);
+        }
+        .card-bonus .tag-item {
+            color: rgba(245, 242, 235, 0.7);
+            border-color: rgba(245, 242, 235, 0.2);
+        }
+
+        /* 頁腳 */
+        .app-footer {
+            text-align: center;
+            padding: 40px 24px;
+            font-size: 11px;
+            color: rgba(16, 30, 56, 0.4);
+            letter-spacing: 2px;
+            font-family: 'Playfair Display', serif;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+    <!-- Hero Header (大師級深邃光影與戰略軸線) -->
+    <header class="hero-header">
+        <div class="hero-axis"></div>
+        <div class="hero-content reveal-blur">
+            <div class="hero-badge">Confidential Document</div>
+            <div class="brand-logo">Island Universe</div>
+            <div class="brand-name">島宇實業</div>
+            <h1 class="title-main">戰略夥伴<br>核心培訓大綱</h1>
+            <div class="title-sub">Strategic Syllabus</div>
+        </div>
+    </header>
+
+    <main class="content-container">
+
+        <!-- ================= 大項 一 ================= -->
+        <h2 class="section-title reveal-left"><i class="fa-solid fa-brain"></i> 一、思維、認知、格局提升：定位</h2>
+        
+        <div class="card reveal-scale">
+            <div class="card-header">
+                <div class="card-title">核心觀念建構</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 70 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    市場分析
+                    <div class="tag-group">
+                        <span class="tag-item">國際</span>
+                        <span class="tag-item">行業別</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">何謂家族辦公室</li>
+                <li class="list-item stagger-item">去產品立場的顧問</li>
+                <li class="list-item stagger-item">銷售『解決方案』</li>
+            </ul>
+        </div>
+
+        <!-- ================= 大項 二 ================= -->
+        <h2 class="section-title reveal-left"><i class="fa-solid fa-route"></i> 二、顧問流程</h2>
+        
+        <div class="card reveal-scale">
+            <div class="card-header">
+                <div class="card-title">標準化接洽與締結</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 70 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    開發、需求激發
+                    <div class="tag-group">
+                        <span class="tag-item highlight">議題與需求挖掘</span>
+                    </div>
+                    <div class="nested-note">找到問題問題解決一半</div>
+                </li>
+                <li class="list-item stagger-item">
+                    首次諮詢_Q5
+                    <div class="tag-group">
+                        <span class="tag-item">專業展現</span>
+                        <span class="tag-item">信息權利</span>
+                        <span class="tag-item">需求確認意向書</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    定價
+                    <div class="tag-group">
+                        <span class="tag-item">需求確認意向書</span>
+                        <span class="tag-item">報價作業</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">提案、報價、成交簽約委任</li>
+                <li class="list-item stagger-item">專案執行</li>
+            </ul>
+        </div>
+
+        <!-- ================= 大項 三 ================= -->
+        <h2 class="section-title reveal-left"><i class="fa-solid fa-layer-group"></i> 三、產品服務_整合專家專業</h2>
+        
+        <!-- 3.1 稅務 -->
+        <div class="card reveal-scale">
+            <div class="chapter-num">1</div>
+            <div class="card-header">
+                <div class="card-title">稅務</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 70 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    法人節稅
+                    <div class="tag-group">
+                        <span class="tag-item">中間廠商</span>
+                        <span class="tag-item">境外費用</span>
+                        <span class="tag-item highlight">投資虧損</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    個人收入
+                    <div class="tag-group">
+                        <span class="tag-item">理財產品</span>
+                        <span class="tag-item">境外收入</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    資產移轉（遺產贈與）
+                    <div class="tag-group">
+                        <span class="tag-item highlight">股權</span>
+                        <span class="tag-item">境外</span>
+                        <span class="tag-item">另類資產</span>
+                        <span class="tag-item">信託</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 3.2 金流 -->
+        <div class="card reveal-scale">
+            <div class="chapter-num">2</div>
+            <div class="card-header">
+                <div class="card-title">金流</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 40 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    金流合規作業
+                    <div class="tag-group">
+                        <span class="tag-item">AML</span>
+                        <span class="tag-item">CFC</span>
+                        <span class="tag-item">CRS</span>
+                        <span class="tag-item">Fatca</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">現金</li>
+                <li class="list-item stagger-item">外匯管制地區</li>
+            </ul>
+        </div>
+
+        <!-- 3.3 環球財務架構 -->
+        <div class="card reveal-scale">
+            <div class="chapter-num">3</div>
+            <div class="card-header">
+                <div class="card-title">環球財務架構_隱藏與隔離</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 90 MINS</div>
+            </div>
+            <div class="nested-note" style="margin-bottom: 20px; border-left-color: var(--vc-terracotta);">
+                <i class="fa-solid fa-earth-americas" style="color:var(--vc-terracotta);"></i> 新加坡、瑞士、香港、美國、英國、歐盟（瑞士）、杜拜、寮國、汶萊
+            </div>
+            
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    私人環球帳戶
+                    <div class="tag-group">
+                        <span class="tag-item">商業帳戶</span>
+                        <span class="tag-item">信託帳戶</span>
+                        <span class="tag-item highlight">投資帳戶（私人銀行）</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    控股環球架構
+                    <div class="tag-group">
+                        <span class="tag-item">設立控股公司</span>
+                        <span class="tag-item highlight">跨境股權架構規劃與執行</span>
+                        <span class="tag-item">投審會</span>
+                        <span class="tag-item">公司章程、法務規劃</span>
+                        <span class="tag-item">金流運作</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">基金架構</li>
+                <li class="list-item stagger-item">跨境基金架構_Samir</li>
+            </ul>
+        </div>
+
+        <!-- 3.4 私人財務室 -->
+        <div class="card reveal-scale">
+            <div class="chapter-num">4</div>
+            <div class="card-header">
+                <div class="card-title">私人財務室_稅務、財務（財力）、融資</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 40 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    專業領域
+                    <div class="tag-group">
+                        <span class="tag-item">財務</span>
+                        <span class="tag-item">商務</span>
+                        <span class="tag-item">法務</span>
+                        <span class="tag-item">行政</span>
+                        <span class="tag-item">工商</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">資深顧問</li>
+                <li class="list-item stagger-item">專家顧問</li>
+                <li class="list-item stagger-item">專案執行</li>
+            </ul>
+        </div>
+
+        <!-- 3.5 資產管理 -->
+        <div class="card reveal-scale">
+            <div class="chapter-num">5</div>
+            <div class="card-header">
+                <div class="card-title">資產管理</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 90 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    期現套利（期貨與證券）
+                    <div class="tag-group">
+                        <span class="tag-item highlight">低風險中等報酬</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    統計學套利（期貨）
+                    <div class="tag-group">
+                        <span class="tag-item highlight">中等風險高報酬</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    私人銀行資產管理策略
+                    <div class="tag-group">
+                        <span class="tag-item">台新</span>
+                        <span class="tag-item">香港</span>
+                        <span class="tag-item">新加坡</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">Crypto 借貸平台</li>
+                <li class="list-item stagger-item">
+                    一級市場
+                    <div class="tag-group">
+                        <span class="tag-item">私募基金</span>
+                        <span class="tag-item">不動產</span>
+                        <span class="tag-item">創投</span>
+                        <span class="tag-item">私募信貸</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 3.6 融資 -->
+        <div class="card reveal-scale">
+            <div class="chapter-num">6</div>
+            <div class="card-header">
+                <div class="card-title">私人與企業融資</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 40 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">高淨值不動產</li>
+                <li class="list-item stagger-item">
+                    企業融資
+                    <div class="tag-group">
+                        <span class="tag-item highlight">財報優化包裝（財務室）</span>
+                        <span class="tag-item">銀行關係資源</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">融資公司</li>
+                <li class="list-item stagger-item">
+                    私募信貸
+                    <div class="tag-group">
+                        <span class="tag-item">非銀行借貸</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 3.7 傳承 -->
+        <div class="card reveal-scale">
+            <div class="chapter-num">7</div>
+            <div class="card-header">
+                <div class="card-title">家族傳承財務室（軟性的）</div>
+                <div class="time-badge"><i class="fa-regular fa-clock"></i> 40 MINS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    傳承
+                    <div class="tag-group">
+                        <span class="tag-item highlight">遺囑</span>
+                        <span class="tag-item highlight">信託</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    教育、意義、家訓
+                    <div class="tag-group">
+                        <span class="tag-item">二代、三代培養</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item">
+                    傳承的藝術
+                    <div class="nested-note">給什麼、怎麼給，不同類型資產安排策略</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= 大項 四 ================= -->
+        <h2 class="section-title reveal-left"><i class="fa-solid fa-chalkboard-user"></i> 四、整合思考與案例解析</h2>
+        
+        <div class="card reveal-scale">
+            <div class="card-header">
+                <div class="card-title">實戰案例</div>
+                <div class="time-badge"><i class="fa-solid fa-graduation-cap"></i> 1~2 SESSIONS</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">方成虎案例</li>
+                <li class="list-item stagger-item">大陸房地產</li>
+                <li class="list-item stagger-item">癌末四期</li>
+                <li class="list-item stagger-item">東南亞支付牌照</li>
+                <li class="list-item stagger-item">電子業採購佣金</li>
+                <li class="list-item stagger-item">國內繼承與投資致富</li>
+            </ul>
+        </div>
+
+        <!-- ================= 戰略加值專題 ================= -->
+        <h2 class="section-title reveal-left"><i class="fa-solid fa-gift"></i> 特別加碼 (Exclusive Bonus)</h2>
+        
+        <div class="card card-bonus reveal-scale">
+            <div class="card-header">
+                <div class="card-title">戰略加餐：高階視野與業務技術</div>
+            </div>
+            <ul class="list-group stagger-container">
+                <li class="list-item stagger-item">
+                    金融監管（牌照）差異
+                    <div class="tag-group">
+                        <span class="tag-item">台灣</span>
+                        <span class="tag-item">新加坡</span>
+                        <span class="tag-item">香港</span>
+                        <span class="tag-item highlight" style="background:transparent; border-color:transparent; padding:0; margin-left:4px;"><i class="fa-regular fa-clock"></i> 30m</span>
+                    </div>
+                </li>
+                <li class="list-item stagger-item" style="margin-top: 20px;">
+                    業務技術
+                    <div class="tag-group">
+                        <span class="tag-item">領導力與權力</span>
+                        <span class="tag-item">推力與拉力</span>
+                        <span class="tag-item highlight" style="background:transparent; border-color:transparent; padding:0; margin-left:4px;"><i class="fa-regular fa-clock"></i> 20m</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        ISLAND UNIVERSE CO., LTD.<br>
+        All Rights Reserved.
+    </footer>
+
+</div>
+
+<!-- 原生 JavaScript: 多維度捲動監聽特效 (Scroll Reveal) -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -40px 0px', 
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale, .reveal-blur, .stagger-container');
+        
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+        
+        setTimeout(() => {
+            document.querySelectorAll('.hero-header .reveal-blur').forEach(el => {
+                el.classList.add('active');
+            });
+        }, 50);
+    });
+</script>
+
+</body>
+</html>
